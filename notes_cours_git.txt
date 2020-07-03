@@ -1,0 +1,264 @@
+=======================================
+GIT - GITHUB
+=======================================
+
+ 1. GitHub kézako ? 
+=================
+
+> c'est un service web d'hébergement et de gestion de développement de logiciels. 
+
+> GitHub utilise le logiciel de gestion de versions 'GIT' 
+
+> Git kézako ? 
+==============
+
+> Git est le logiciel qui fait tourner GitHub
+
+> Git est un "logiciel de contrôle de version" ou VCS (Version Control System) 
+
+> gère les modifs d'un projet sans écraser n'importe quelle partie du projet 
+
+> Git => en ligne de commandes 
+
+
+ 2. Téléchargement et installation de de Git 
+=============================================
+
+> site web de git : https://git-scm.com/
+
+
+ 3. débuter avec Git 
+=====================
+
+> Quelques commandes de base de Git :
+------------------------------------- 
+
+	> 1ere commande : git 
+
+	> 2eme commande : git --version      => version installée  
+
+	> 3eme commande de base : git --help => aide 
+
+		> une aide pour la commande 'commit' : git commit --help /OU/  git commit -h
+
+
+> configuration de Git
+-----------------------
+	
+	> la configuration de git se fait via la commande 'config' 
+
+		-> identifiants du développeur : 
+
+			git config --global user.name "younes mezine"
+
+			git config --global user.email "mezineyounes@gmail.com" 
+
+		
+***********************************************************************
+NB : Définir l'éditeur de texte à utiliser par défaut :
+
+	git config --global core.editor "Notepad++"
+
+***********************************************************************
+
+> initialisation de Git 
+------------------------
+
+	> Eclipse : création du projet 
+
+	> dans la console, se mettre sur le dossier du projet : cd <nom du dossier projet>
+
+	> initialiser un dépôt (repository) local git avec la commande : git init
+
+		-> git va se mettre sur la branche principale nommée : 'master' 
+
+		-> git à crée un dépôt local => notre dépôt est prêt à recevoir les codes sources 
+	
+		************************************************************************
+		   création d'un dossier et initialisation d'un dépôt dans ce dossier : 
+			
+				git init <nom-dossier>
+		************************************************************************
+
+
+	> affichage du status actuel du dépôt : git status 
+		
+
+
+> indexation des fichiers par git 
+---------------------------------
+
+	> utilisation de la commande : git add 
+
+		-> permet de demander à git de surveiller (indexer) des fichiers
+
+			-> surveiller (tacker/indexer) un fichier :  git add <nom_fichier> 
+
+			-> surveiller l'ensemble des fichiers : git add .
+
+
+> commiter les changements 
+---------------------------
+
+	-> commit : - enregistrer une copie (version/révision) de notre projet à un instant T dans le dépôt local 
+                    - marquer une nouvelle version dans GIT. faire une photocopie de notre projet à un instant T. 
+                      par la suite, on peut revenir en arrière et consulter l'historique.  
+
+	-> commande pour le commit : git commit 
+
+			-> on doit obligatoirement ajouter un message au commit : git commit -m "message"
+
+
+	-> il faut indexer les fichiers avant des les commiter : 
+			
+			> 1. git add .
+			> 2. git commit -m "message"
+
+	-> indexer et commiter en même temps : 
+		
+			> git commit -am "message"
+
+
+> Ignorer les fichiers du commit et de l'indexation (gitignore)
+----------------------------------------------------------------
+
+	> git nous permet d'ignorer des fichiers de l'indexation et du commit. 
+
+	> on doit définir un fichier nommé '.gitignore' placé à la racine du dépôt local de git 
+
+	> dans le fichier, on va lister les fichiers à ignorer
+
+
+ 4. Intéraction avec un dépôt distant (GitHub, GitLab, ...etc)
+==============================================================
+
+4.1. GitHub 
+------------
+
+	> plateforme web open source qui permet aux développeurs de déposer des projets pour les partager 
+          travailler en collaboration avec d'autres développeurs.
+
+	> site web : https://github.com/
+
+	> création d'un espace 
+
+
+4.2. Ajout d'un dépôt distant avec GIT
+---------------------------------------
+
+	> commande git pour la synchronisation du dépôt GitHub avec notre dépôt local : 
+
+			git remote add origin <url du dépôt distant> 
+
+				-> origin : nom par défaut du dépôt distant 
+
+
+				Ex : -> url du dépôt distant : https://github.com/GayaDev/demo_git.git
+
+					git remote add origin https://github.com/GayaDev/demo_git.git
+
+	> test de la synchronisation : 
+
+			-> affichage du nom du dépôt : => origin 
+
+					git remote 
+
+			-> affichage des infos du dépôt distant : => tetch (récup du dépôt) / push (pousser dans le dépôt)
+
+					git remote -v
+
+
+	> suppression du dépôt distant : git remote rm origin 
+
+	> renommer le dépôt distant : git remote rename origin depotGit
+
+			-> origin : ancien nom 
+			-> depotGit : nouveau nom  
+
+
+
+4.3. pousser des versions vers le dépôt distant avec GIT
+--------------------------------------------------------
+
+	> pour pousser des modifis du dépôt local vers le dépôt distant : 
+
+			git push origin master 
+
+				-> origin : nom du dépôt distant sur github 
+				-> master : la branche qu'on veut pousser en local 
+
+		en cas d'erreur, on force le push avec le param : --force / -f
+
+			git push origin master --force 
+
+
+4.4. récupérer des version  depuis le dépôt distant avec GIT
+------------------------------------------------------------
+
+> récupérer un projet sur github : git clone <url du projet>
+
+	-> Ex : git clone https://github.com/GayaDev/demo_git.git
+
+> Git local = l'espace de travail (projet) + le dépôt local 
+
+> synchroniser notre espace de travail (projet) avec un dépôt distant : 
+
+	1. synchroniser le dépôt local avec le dépôt distant 
+
+		-> commande git : git fetch origin master 
+
+	2. synchroniser le dépôt local avec l'éspace de travail
+
+		-> commande git : git merge origin master 
+
+	**************************************************************************************
+	* 	Quand on est sur notre espace de travail :
+	*		
+	*		-> le 'commit' : passer de l'espace de travail vers le dépôt local 
+	*
+	*		-> le 'push' :   passer du dépôt local  au dépôt distant 
+	*
+	*		-> le 'fecth' :  passer du  dépôt distant vers le dépôt local
+	*
+	*		-> le 'merge' :  passer du dépôt local vers l'espace de travail
+	*
+	*	=> NB : raccourci des étapes 'fetch' et 'merge': 
+	*		
+	*		-> le 'pull' : association d'un 'fetch' et d'un 'merge'
+	*
+	**************************************************************************************
+
+
+4.5. système de branches avec GIT
+------------------------------------------------------------
+
+
+> création d'une branch : git branch <nom de la branche>
+
+	-> Ex : git branch v2.0
+
+> passer et switcher de branche : git checkout V2.0
+
+> créer une branche et passer dessus : 
+
+	-> Ex : git checkout V2.0 -b V2.1
+
+> pousser le contenu d'une branche (ex : V2.0) vers le dépôt distant : 
+
+	-> git push origin V2.0
+
+> fusionner deux branches : 
+
+	-> on se positionne sur la branche de destination 'master' et on fait un merge 
+
+		-> git checkout master 
+	
+		-> git merge V2.0 
+
+
+
+
+
+
+
+
